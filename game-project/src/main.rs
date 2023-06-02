@@ -1,5 +1,6 @@
 extern crate piston_window;
 use piston_window::*;
+use piston_window::{text, EventLoop, Glyphs, PistonWindow, WindowSettings};
 
 struct Player {
     x: f64,
@@ -21,6 +22,14 @@ fn main() {
         .exit_on_esc(true)
         .build()
         .unwrap();
+
+    let assets = find_folder::Search::ParentsThenKids(3, 3)
+        .for_folder("assets")
+        .unwrap();
+    let ref font = assets.join("FiraSans-Regular.ttf");
+    let texture_context = window.create_texture_context();
+    let mut glyphs =
+        Glyphs::new(font, texture_context, TextureSettings::new()).expect("Failed to load font");
 
     let mut player = Player {
         x: 0.0,
@@ -47,6 +56,7 @@ fn main() {
     ];
 
     while let Some(e) = window.next() {
+        score += 1;
         // Actualizamos la posición de los enemigos según su velocidad.
         for enemy in &mut enemies {
             enemy.x += enemy.speed_x;
@@ -68,7 +78,7 @@ fn main() {
                 player.y = 0.0;
             }
         }
-        window.draw_2d(&e, |c, g, _| {
+        window.draw_2d(&e, |c, g, device| {
             clear([1.0; 4], g);
 
             rectangle(
@@ -86,6 +96,17 @@ fn main() {
                     g,
                 );
             }
+            text::Text::new_color([1.0, 0.0, 0.0, 1.0], 32)
+                .draw(
+                    &format!("Score: {}", score),
+                    &mut glyphs,
+                    &c.draw_state,
+                    c.transform.trans(10.0, 50.0),
+                    g,
+                )
+                .unwrap();
+
+            glyphs.factory.encoder.flush(device);
         });
         if let Some(Button::Keyboard(key)) = e.press_args() {
             match key {
