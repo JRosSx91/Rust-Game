@@ -24,6 +24,20 @@ fn main() {
         size: 50.0,
     };
 
+    let mut enemies = vec![
+        Enemy {
+            x: 100.0,
+            y: 100.0,
+            size: 50.0,
+        },
+        Enemy {
+            x: 200.0,
+            y: 200.0,
+            size: 50.0,
+        },
+        // puedes añadir tantos enemigos como quieras
+    ];
+
     while let Some(e) = window.next() {
         window.draw_2d(&e, |c, g, _| {
             clear([1.0; 4], g);
