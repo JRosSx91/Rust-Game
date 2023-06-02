@@ -30,5 +30,14 @@ fn main() {
                 g,
             );
         });
+        if let Some(Button::Keyboard(key)) = e.press_args() {
+            match key {
+                Key::Up => player.y -= 1.0,
+                Key::Down => player.y += 1.0,
+                Key::Left => player.x -= 1.0,
+                Key::Right => player.x += 1.0,
+                _ => {}
+            }
+        }
     }
 }
