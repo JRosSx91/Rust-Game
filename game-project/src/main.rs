@@ -43,11 +43,20 @@ fn main() {
             clear([1.0; 4], g);
 
             rectangle(
-                [1.0, 0.0, 0.0, 1.0],
+                [1.0, 0.0, 0.0, 1.0], //rojo
                 [player.x, player.y, player.size, player.size],
                 c.transform,
                 g,
             );
+
+            for enemy in &enemies {
+                rectangle(
+                    [0.0, 0.0, 1.0, 1.0], //azul
+                    [enemy.x, enemy.y, enemy.size, enemy.size],
+                    c.transform,
+                    g,
+                );
+            }
         });
         if let Some(Button::Keyboard(key)) = e.press_args() {
             match key {
