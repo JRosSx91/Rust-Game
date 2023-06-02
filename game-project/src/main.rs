@@ -15,6 +15,8 @@ struct Enemy {
 }
 
 fn main() {
+    let mut score: i32 = 0;
+
     let mut window: PistonWindow = WindowSettings::new("JRosSx91 Game!", [640, 480])
         .exit_on_esc(true)
         .build()
@@ -31,23 +33,27 @@ fn main() {
             x: 100.0,
             y: 100.0,
             size: 50.0,
+            speed_x: 1.0,
+            speed_y: 1.0,
         },
         Enemy {
             x: 200.0,
             y: 200.0,
             size: 50.0,
+            speed_x: -1.0,
+            speed_y: -1.0,
         },
         // puedes añadir tantos enemigos como quieras
     ];
 
     while let Some(e) = window.next() {
-        // Primero, actualizamos la posición de los enemigos según su velocidad.
+        // Actualizamos la posición de los enemigos según su velocidad.
         for enemy in &mut enemies {
             enemy.x += enemy.speed_x;
             enemy.y += enemy.speed_y;
         }
 
-        // A continuación, hacemos que los enemigos reboten en las paredes cambiando su dirección cuando alcanzan el borde de la pantalla.
+        // Hacemos que los enemigos reboten en las paredes cambiando su dirección cuando alcanzan el borde de la pantalla.
         for enemy in &mut enemies {
             if enemy.x < 0.0 || enemy.x > 640.0 - enemy.size {
                 enemy.speed_x = -enemy.speed_x;
