@@ -39,6 +39,12 @@ fn main() {
     ];
 
     while let Some(e) = window.next() {
+        for enemy in &enemies {
+            if are_colliding(&player, enemy) {
+                player.x = 0.0;
+                player.y = 0.0;
+            }
+        }
         window.draw_2d(&e, |c, g, _| {
             clear([1.0; 4], g);
 
