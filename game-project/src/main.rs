@@ -41,6 +41,21 @@ fn main() {
     ];
 
     while let Some(e) = window.next() {
+        // Primero, actualizamos la posición de los enemigos según su velocidad.
+        for enemy in &mut enemies {
+            enemy.x += enemy.speed_x;
+            enemy.y += enemy.speed_y;
+        }
+
+        // A continuación, hacemos que los enemigos reboten en las paredes cambiando su dirección cuando alcanzan el borde de la pantalla.
+        for enemy in &mut enemies {
+            if enemy.x < 0.0 || enemy.x > 640.0 - enemy.size {
+                enemy.speed_x = -enemy.speed_x;
+            }
+            if enemy.y < 0.0 || enemy.y > 480.0 - enemy.size {
+                enemy.speed_y = -enemy.speed_y;
+            }
+        }
         for enemy in &enemies {
             if are_colliding(&player, enemy) {
                 player.x = 0.0;
