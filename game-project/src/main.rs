@@ -20,9 +20,11 @@ fn main() {
     };
 
     while let Some(e) = window.next() {
-        window.draw_2d(&e, |_c, g, _| {
+        window.draw_2d(&e, |c, g, _| {
+            clear([1.0; 4], g);
+
             rectangle(
-                [1.0, 0.0, 0.0, 1.0], // color rojo
+                [1.0, 0.0, 0.0, 1.0],
                 [player.x, player.y, player.size, player.size],
                 c.transform,
                 g,
