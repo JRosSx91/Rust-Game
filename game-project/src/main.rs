@@ -69,3 +69,9 @@ fn main() {
         }
     }
 }
+fn are_colliding(a: &Player, b: &Enemy) -> bool {
+    let distance_x = (b.x - a.x).abs();
+    let distance_y = (b.y - a.y).abs();
+
+    distance_x < a.size / 2.0 + b.size / 2.0 && distance_y < a.size / 2.0 + b.size / 2.0
+}
