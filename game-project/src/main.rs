@@ -6,6 +6,11 @@ struct Player {
     y: f64,
     size: f64,
 }
+struct Enemy {
+    x: f64,
+    y: f64,
+    size: f64,
+}
 
 fn main() {
     let mut window: PistonWindow = WindowSettings::new("JRosSx91 Game!", [640, 480])
