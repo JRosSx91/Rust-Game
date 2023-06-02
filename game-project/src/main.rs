@@ -1,6 +1,4 @@
-extern crate piston_window;
 use piston_window::*;
-use piston_window::{text, EventLoop, Glyphs, PistonWindow, WindowSettings};
 
 struct Player {
     x: f64,
