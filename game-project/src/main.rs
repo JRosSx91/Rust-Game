@@ -10,6 +10,8 @@ struct Enemy {
     x: f64,
     y: f64,
     size: f64,
+    speed_x: f64,
+    speed_y: f64,
 }
 
 fn main() {
